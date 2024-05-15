@@ -1,7 +1,6 @@
 # test_calculator.py
 import sys
 import os
-import pytest
 
 
 
