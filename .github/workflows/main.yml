@@ -22,5 +22,5 @@ jobs:
       run: pip install pytest
 
     - name: Run test
-      run: python -m pytest testd
+      run: python -m pytest check/testd/test_calc.py
 
