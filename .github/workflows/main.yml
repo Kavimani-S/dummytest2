@@ -22,6 +22,8 @@ jobs:
       run: pip install pytest
 
     - name: Run test
-      run: pytest testd
+      run: |
+        ls -al  # List files and directories to verify structure
+        pytest  # Run pytest without specifying directory
       
 
