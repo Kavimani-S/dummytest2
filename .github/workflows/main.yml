@@ -28,4 +28,4 @@ jobs:
       run: dir
 
     - name: Run tests
-      run: pytest testd  # Specify the test directory
+      run: pytest check/testd/test_calc.py  # Specify the test directory
