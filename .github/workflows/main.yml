@@ -33,5 +33,8 @@ jobs:
     - name: Move test file if tests pass
       if: success()  # This step will only run if the previous step succeeds
       run: |
-        if not exist passed mkdir passed
-        move testd\test_calc.py passed
+        if (!(Test-Path -Path "passed")) {
+          New-Item -ItemType Directory -Path "passed"
+        }
+        Move-Item -Path "testd\test_calc.py" -Destination "passed\"
+      shell: pwsh
