@@ -10,10 +10,13 @@ jobs:
   build:
 
     runs-on: windows-latest  # Use windows-latest for a Windows environment
+    
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -37,4 +40,16 @@ jobs:
           New-Item -ItemType Directory -Path "passed"
         }
         Move-Item -Path "check\testd\test_calc.py" -Destination "passed\"
+      shell: pwsh
+      
+    - name: Commit and push changes
+      if: success()  # This step will only run if the tests succeed
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add passed/test_calc.py
+        git commit -m "Move test_calc.py to passed folder after successful tests"
+        git push origin main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       shell: pwsh
