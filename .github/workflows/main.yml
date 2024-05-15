@@ -30,10 +30,6 @@ jobs:
     - name: Run tests
       run: pytest check/testd/test_calc.py  # Specify the test directory
 
-    - name: List testd directory contents after tests
-      if: success()  # This step will only run if the tests succeed
-      run: dir testd
-
     - name: Move test file if tests pass
       if: success()  # This step will only run if the previous step succeeds
       run: |
