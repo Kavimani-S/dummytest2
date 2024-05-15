@@ -30,11 +30,15 @@ jobs:
     - name: Run tests
       run: pytest check/testd/test_calc.py  # Specify the test directory
 
+    - name: List testd directory contents after tests
+      if: success()  # This step will only run if the tests succeed
+      run: dir testd
+
     - name: Move test file if tests pass
       if: success()  # This step will only run if the previous step succeeds
       run: |
         if (!(Test-Path -Path "passed")) {
           New-Item -ItemType Directory -Path "passed"
         }
-        Move-Item -Path "testd\test_calc.py" -Destination "passed\"
+        Move-Item -Path "check\testd\test_calc.py" -Destination "passed\"
       shell: pwsh
